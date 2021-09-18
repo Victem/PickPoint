@@ -41,7 +41,7 @@ namespace PIckPopint.WebApi.Controllers
 
                 if (!postamate.Status)
                 {
-                    return Forbid();
+                    return StatusCode(StatusCodes.Status403Forbidden);
                 }
 
                 var newOrder = order.ToOrder();
@@ -62,22 +62,27 @@ namespace PIckPopint.WebApi.Controllers
                 return NotFound();
             }
 
-            return order.ToOrderDto();
+            return Ok(order.ToOrderDto());
         }
 
         [HttpPut]
         public ActionResult Put(OrderUpdateDto order)
         {
-            var existedOrder = _orderRepository.FindById(order.Id);
-            if (existedOrder == null)
+            if (ModelState.IsValid)
             {
-                return NotFound();
-            }
+                var existedOrder = _orderRepository.FindById(order.Id);
+                if (existedOrder == null)
+                {
+                    return NotFound();
+                }
 
-            existedOrder.FromUpdateDto(order);
-            _orderRepository.Update(existedOrder);
+                existedOrder.FromUpdateDto(order);
+                _orderRepository.Update(existedOrder);
+
+                return Ok();
+            }
+            return BadRequest();
             
-            return Ok();
         }
 
         [HttpDelete("{id}")]

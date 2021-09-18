@@ -34,14 +34,13 @@ namespace PIckPopint.WebApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<PostamateDto> Get(string id)
         {
-            var result = _repository.FindById(id)
-               .ToPostamateDto();
+            var result = _repository.FindById(id);
 
             if (result == null)
             {
                 return NotFound();
             }
-            return result;
+            return Ok(result.ToPostamateDto());
         }
     }
 }
