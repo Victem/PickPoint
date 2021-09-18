@@ -38,5 +38,14 @@ namespace PickPoint.Data.DTOMappings
             };
             return order;
         }
+
+        public static Order FromUpdateDto(this Order order, OrderUpdateDto orderUpdateDto)
+        {
+            order.Items = orderUpdateDto.Items;
+            order.Phone = orderUpdateDto.Phone;
+            order.Customer = orderUpdateDto.Customer;
+            order.Price = orderUpdateDto.Price;
+            return order;
+        }
     }
 }
