@@ -47,5 +47,18 @@ namespace PickPoint.Data.DTOMappings
             order.Price = orderUpdateDto.Price;
             return order;
         }
+
+        public static OrderUpdateDto ToOrderUpdateDto(this OrderDto order)
+        {
+            return new OrderUpdateDto
+            {
+                Id = order.Id,
+                Items = order.Items,
+                Customer = order.Customer,
+                Phone = order.Phone,
+                Price = order.Price
+            };
+        }
+
     }
 }
