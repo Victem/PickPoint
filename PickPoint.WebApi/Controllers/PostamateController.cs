@@ -24,18 +24,23 @@ namespace PIckPopint.WebApi.Controllers
             _repository = repository;
         }
         [HttpGet]
-        public IEnumerable<PostamateDto> Get()
+        public ActionResult<IEnumerable<PostamateDto>> Get()
         {
             var result = _repository.Get()
                 .Select(p=> p.ToPostamateDto());
-            return result;
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public PostamateDto Get(string id)
+        public ActionResult<PostamateDto> Get(string id)
         {
             var result = _repository.FindById(id)
                .ToPostamateDto();
+
+            if (result == null)
+            {
+                return NotFound();
+            }
             return result;
         }
     }
