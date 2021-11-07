@@ -3,7 +3,7 @@
 using PickPoint.Data.DB;
 using PickPoint.Infrastructure;
 
-using PIckPopint.WebApi.Controllers;
+using PickPoint.WebApi.Controllers;
 
 using System;
 using System.Collections.Generic;

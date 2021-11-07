@@ -8,7 +8,7 @@ using PickPoint.Data.DTO;
 using PickPoint.Data.Entities;
 using PickPoint.Infrastructure;
 
-using PIckPopint.WebApi.Controllers;
+using PickPoint.WebApi.Controllers;
 
 using System.Collections.Generic;
 using System.Linq;

@@ -6,7 +6,7 @@ using PickPoint.Data.DTO;
 using PickPoint.Data.DTOMappings;
 using PickPoint.Infrastructure;
 
-using PIckPopint.WebApi.Controllers;
+using PickPoint.WebApi.Controllers;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System;
@@ -209,7 +209,8 @@ namespace PickPpoint.Test
 
         [TestMethod]
         public void OrderController_Post_Inactive_Postamate()
-        {// Arrange
+        {
+            // Arrange
             var newOrder = GetNewOrderDto();
             newOrder.PostamateId = "0001-003";
             
@@ -258,6 +259,7 @@ namespace PickPpoint.Test
         }
 
 
+        
 
         [TestMethod]
         public void OrderController_Put_InvalidModel_Whong_Phone_Format()

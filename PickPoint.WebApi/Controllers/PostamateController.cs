@@ -10,8 +10,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
-namespace PIckPopint.WebApi.Controllers
+namespace PickPoint.WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -27,7 +28,7 @@ namespace PIckPopint.WebApi.Controllers
         public ActionResult<IEnumerable<PostamateDto>> Get()
         {
             var result = _repository.Get()
-                .Select(p=> p.ToPostamateDto());
+                .Select(p => p.ToPostamateDto());
             return Ok(result);
         }
 

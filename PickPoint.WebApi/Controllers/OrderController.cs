@@ -12,7 +12,7 @@ using PickPoint.Data.Entities;
 using PickPoint.Data.Enums;
 using PickPoint.Infrastructure;
 
-namespace PIckPopint.WebApi.Controllers
+namespace PickPoint.WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -30,26 +30,23 @@ namespace PIckPopint.WebApi.Controllers
         [HttpPost]
         public ActionResult<Order> Post(OrderCreateDto order)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) { return BadRequest(ModelState);}
+            
+            var postamate = _postamateRepository.FindById(order.PostamateId);
+            if (postamate == null)
             {
-                var postamate = _postamateRepository.FindById(order.PostamateId);
-
-                if (postamate == null)
-                {
-                    return NotFound();
-                }
-
-                if (!postamate.Status)
-                {
-                    return StatusCode(StatusCodes.Status403Forbidden);
-                }
-
-                var newOrder = order.ToOrder();
-                _orderRepository.Create(newOrder);
-
-                return CreatedAtAction(nameof(Get), new { id = 1 }, newOrder.ToOrderDto());
+                return NotFound();
             }
-            return BadRequest(ModelState);
+
+            if (!postamate.Status)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden);
+            }
+
+            var newOrder = order.ToOrder();
+            _orderRepository.Create(newOrder);
+
+            return CreatedAtAction(nameof(Get), new { id = newOrder.Id }, newOrder.ToOrderDto());
         }
 
         [HttpGet("{id}")]
@@ -68,21 +65,18 @@ namespace PIckPopint.WebApi.Controllers
         [HttpPut]
         public ActionResult Put(OrderUpdateDto order)
         {
-            if (ModelState.IsValid)
-            {
-                var existedOrder = _orderRepository.FindById(order.Id);
-                if (existedOrder == null)
-                {
-                    return NotFound();
-                }
-
-                existedOrder.FromUpdateDto(order);
-                _orderRepository.Update(existedOrder);
-
-                return Ok();
-            }
-            return BadRequest();
+            if (!ModelState.IsValid) { return BadRequest(); }
             
+            var existedOrder = _orderRepository.FindById(order.Id);
+            if (existedOrder == null)
+            {
+                return NotFound();
+            }
+
+            existedOrder.FromUpdateDto(order);
+            _orderRepository.Update(existedOrder);
+
+            return Ok();
         }
 
         [HttpDelete("{id}")]

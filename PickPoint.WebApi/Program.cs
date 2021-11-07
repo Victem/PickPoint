@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PIckPopint.WebApi
+namespace PickPoint.WebApi
 {
     public class Program
     {
