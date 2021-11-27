@@ -13,7 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PickPpoint.Test
+namespace PickPoint.Test
 {
     [TestClass]
     public class OrderControllerTest

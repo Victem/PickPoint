@@ -13,7 +13,7 @@ using PickPoint.WebApi.Controllers;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PickPpoint.Test
+namespace PickPoint.Test
 {
     [TestClass]
     public class PostamateControllerTest
@@ -26,7 +26,7 @@ namespace PickPpoint.Test
             var postamatesRepository = new PostamateDbRepository(pickPointContext);
             var postamateController = new PostamateController(postamatesRepository);
 
-            var result = (OkObjectResult)postamateController.Get().Result;
+            var result = (OkObjectResult)postamateController.GetAsync().Result;
             var postamates = (result.Value as IEnumerable<PostamateDto>);
             var actualCount = postamates.Count();
 

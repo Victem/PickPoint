@@ -25,7 +25,7 @@ namespace PickPoint.WebApi.Controllers
             _repository = repository;
         }
         [HttpGet]
-        public ActionResult<IEnumerable<PostamateDto>> Get()
+        public ActionResult<IEnumerable<PostamateDto>> GetAsync()
         {
             var result = _repository.Get()
                 .Select(p => p.ToPostamateDto());

@@ -83,15 +83,9 @@ namespace PickPoint.WebApi.Controllers
         public ActionResult Delete(int id)
         {
             var order = _orderRepository.FindById(id);
-            if (order != null)
-            {
-                _orderRepository.Remove(order);
-            }
-            else
-            {
-                return NotFound();
-            }
-
+            if (order == null) { return NotFound(); }
+            
+            _orderRepository.Remove(order);
             return NoContent();
         }
     }
